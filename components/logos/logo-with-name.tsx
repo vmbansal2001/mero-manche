@@ -14,7 +14,10 @@ const LogoWithName = (props: Props) => {
         height={100}
         className="w-10 h-10"
       />
-      <span className="text-xl font-bold text-[#FF5336]">MeroManche</span>
+      <p className="text-xl font-bold font-roca">
+        <span className="text-black">Mero</span>
+        <span className="text-[#FF5336]">Manche</span>
+      </p>
     </div>
   );
 };

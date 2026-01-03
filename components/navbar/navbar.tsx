@@ -7,12 +7,12 @@ type Props = {};
 const Navbar = (props: Props) => {
   const routes = [
     {
-      label: "Home",
-      href: "/",
-    },
-    {
       label: "Blogs",
       href: "/blog",
+    },
+    {
+      label: "Home",
+      href: "/",
     },
   ];
 
@@ -23,7 +23,7 @@ const Navbar = (props: Props) => {
           <LogoWithName />
         </Link>
 
-        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-4">
+        <div className="flex items-center gap-4">
           {routes.map((route) => (
             <Link
               key={route.href}
@@ -35,11 +35,11 @@ const Navbar = (props: Props) => {
           ))}
         </div>
 
-        <div className="">
+        {/* <div className="">
           <button className="bg-primary-500 text-white px-4 py-2 rounded-md text-sm font-medium">
             Sign In
           </button>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

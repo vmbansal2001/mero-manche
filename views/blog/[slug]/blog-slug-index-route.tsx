@@ -2,6 +2,7 @@ import { BlogHero } from "@/views/blog/[slug]/BlogHero";
 import { PortableTextRenderer } from "@/views/blog/[slug]/PortableTextRenderer";
 import type { BlogPost } from "@/sanity/queries";
 import Navbar from "@/components/navbar/navbar";
+import Footer from "@/components/footer/footer";
 
 type BlogSlugIndexRouteProps = {
   post: BlogPost;
@@ -17,6 +18,7 @@ const BlogSlugIndexRoute = ({ post }: BlogSlugIndexRouteProps) => {
           <PortableTextRenderer value={post.content} />
         </article>
       </div>
+      <Footer />
     </main>
   );
 };

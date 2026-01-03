@@ -8,8 +8,28 @@
   padding-right: 1rem;
 }
 
+/* Custom Fonts - Roca Two */
+@font-face {
+  font-family: 'Roca Two';
+  src: url('/assets/fonts/roca-two-thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roca Two';
+  src: url('/assets/fonts/roca-two-bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* MeroManche Brand Colors */
 @theme {
+  /* Font Families */
+  --font-roca: 'Roca Two', sans-serif;
+  
   /* Primary - Coral Red */
   --color-primary-500: #ff5336;
   --color-primary-600: #e64a30;

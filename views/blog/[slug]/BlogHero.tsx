@@ -23,13 +23,15 @@ export function BlogHero({ post }: BlogHeroProps) {
     <section className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm">
       <div className="relative w-full overflow-hidden bg-linear-to-br from-zinc-100 to-zinc-200">
         {post.coverImage ? (
-          <SanityImage
-            image={post.coverImage}
-            alt={post.title}
-            width={1000}
-            className="object-cover h-full w-full"
-            preload
-          />
+          <div className="p-1.5 border-2 border-zinc-200 rounded-3xl">
+            <SanityImage
+              image={post.coverImage}
+              alt={post.title}
+              width={1000}
+              className="object-cover h-full w-full rounded-[18px]"
+              preload
+            />
+          </div>
         ) : null}
         <div className="absolute inset-0 bg-linear-to-t from-black/40 via-black/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
