@@ -42,13 +42,13 @@ const components: PortableTextComponents = {
   },
   types: {
     image: ({ value }) => (
-      <figure className="mt-8 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50">
+      <figure className="mt-8 overflow-hidden w-full border border-zinc-200 bg-zinc-50">
         {value ? (
           <SanityImage
             image={value}
             alt={value.alt || "Blog image"}
-            width={1400}
-            height={900}
+            // width={1400}
+            // height={900}
             className="h-auto w-full object-cover"
             sizes="(max-width: 768px) 100vw, 1100px"
           />

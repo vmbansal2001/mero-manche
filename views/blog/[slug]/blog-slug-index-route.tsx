@@ -10,7 +10,7 @@ const BlogSlugIndexRoute = ({ post }: BlogSlugIndexRouteProps) => {
   return (
     <main className="common-frame-box py-12">
       <BlogHero post={post} />
-      <article className="mt-10 max-w-3xl space-y-4">
+      <article className="mt-20 space-y-4">
         <PortableTextRenderer value={post.content} />
       </article>
     </main>
