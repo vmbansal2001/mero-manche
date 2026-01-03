@@ -26,6 +26,7 @@ export async function generateMetadata({
     query: blogBySlugQuery,
     params: { slug: slug ?? "" },
     revalidate,
+    tags: ["blog", `blog-${slug}`],
   });
 
   if (!post) {
@@ -65,6 +66,7 @@ const Page = async ({ params }: PageProps) => {
     query: blogBySlugQuery,
     params: { slug: slug ?? "" },
     revalidate,
+    tags: ["blog", `blog-${slug}`],
   });
 
   if (!post) {

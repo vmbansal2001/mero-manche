@@ -15,6 +15,7 @@ const Page = async () => {
   const posts = await sanityFetch<BlogListItem[]>({
     query: blogListQuery,
     revalidate,
+    tags: ["blog"],
   });
 
   return <BlogIndexRoute posts={posts} />;

@@ -41,13 +41,13 @@ export async function POST(req: NextRequest) {
       const additionalBlogPaths = ["/blog"];
 
       if (slug) {
-        // Revalidate the specific page
+        // Revalidate the specific page (omit second param to revalidate both page and layout)
         const pagePath = `${basePath}/${slug}`;
-        revalidatePath(pagePath, "page");
-        revalidatePath(basePath, "page");
+        revalidatePath(pagePath);
+        revalidatePath(basePath);
 
         if (documentType === "blog") {
-          additionalBlogPaths.forEach((path) => revalidatePath(path, "page"));
+          additionalBlogPaths.forEach((path) => revalidatePath(path));
         }
 
         console.log(`Revalidated ${documentType} page: ${pagePath}`);
@@ -61,9 +61,9 @@ export async function POST(req: NextRequest) {
       } else {
         // If slug is missing, revalidate all pages of this type
         // This is useful for deletions or when slug changes
-        revalidatePath(basePath, "layout");
+        revalidatePath(basePath);
         if (documentType === "blog") {
-          additionalBlogPaths.forEach((path) => revalidatePath(path, "layout"));
+          additionalBlogPaths.forEach((path) => revalidatePath(path));
         }
         console.log(`Revalidated all ${documentType} pages (slug missing)`);
 

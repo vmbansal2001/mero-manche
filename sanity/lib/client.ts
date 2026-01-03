@@ -25,10 +25,12 @@ export async function sanityFetch<T>({
   query,
   params = {},
   revalidate = 86400, // 24 hours
+  tags,
 }: {
   query: string;
   params?: Record<string, unknown>;
   revalidate?: number | false;
+  tags?: string[];
 }): Promise<T> {
-  return client.fetch<T>(query, params, { next: { revalidate } });
+  return client.fetch<T>(query, params, { next: { revalidate, tags } });
 }
