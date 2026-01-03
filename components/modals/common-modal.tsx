@@ -89,7 +89,7 @@ const CommonModal: React.FC<CommonModalProps> = ({
 
           {/* Modal */}
           <motion.div
-            className={`relative w-full max-w-lg max-h-[90vh] rounded-xl overflow-auto no-scrollbar ${
+            className={`relative w-full max-w-lg mx-3 lg:mx-0 max-h-[90vh] rounded-xl overflow-auto no-scrollbar ${
               className?.container || ""
             }`}
             variants={modalVariants}

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Logo from "@/assets/images/MeroManche-logo-BlackAndOrange.png";
 import { ArrowRight } from "lucide-react";
+import JoinEarlyAccessButton from "@/components/join-early-access/join-early-access-button";
 
 type Props = {};
 
@@ -41,13 +42,10 @@ const IndexHeroSection = (props: Props) => {
       </motion.div>
 
       <div className="flex flex-col items-center justify-center px-4">
-        <button
-          type="submit"
-          className="group px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 rounded-full transition-all duration-300 hover:shadow-lg flex items-center gap-2 bg-primary-500 text-white cursor-pointer font-semibold text-sm sm:text-base md:text-lg"
-        >
+        <JoinEarlyAccessButton className="group px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 rounded-full transition-all duration-300 hover:shadow-lg flex items-center gap-2 bg-primary-500 text-white cursor-pointer font-semibold text-sm sm:text-base md:text-lg">
           Join Early Access
           <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform group-hover:translate-x-1" />
-        </button>
+        </JoinEarlyAccessButton>
 
         <p className="text-xs sm:text-sm md:text-base text-center mt-3 sm:mt-4 text-secondary-600">
           Starting with a limited group of families

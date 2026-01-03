@@ -1,5 +1,4 @@
-import Link from "next/link";
-import React from "react";
+import JoinEarlyAccessButton from "@/components/join-early-access/join-early-access-button";
 
 const JoinEarlyAccess = () => {
   return (
@@ -13,12 +12,9 @@ const JoinEarlyAccess = () => {
           We're starting small to get this right. No spam. No pressure.
         </p>
 
-        <Link
-          href="/"
-          className="bg-primary-500 text-white px-6 py-3 rounded-full text-lg font-medium hover:shadow-lg transition-all duration-300"
-        >
+        <JoinEarlyAccessButton className="bg-primary-500 text-white px-6 py-3 rounded-full text-lg font-medium hover:shadow-lg transition-all duration-300">
           Join the waitlist &rarr;
-        </Link>
+        </JoinEarlyAccessButton>
       </div>
     </div>
   );
