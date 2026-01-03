@@ -29,7 +29,8 @@ const WhyChooseUs = (props: Props) => {
     <div className="">
       <h2 className="text-4xl md:text-5xl font-semibold text-center mb-12">
         <span className="text-neutral-900">Why </span>
-        <span className="text-primary-500">MeroManche</span>
+        <span className="text-black font-roca">Mero</span>
+        <span className="text-primary-500 font-roca">Manche</span>
         <span className="text-neutral-900"> Is Different</span>
       </h2>
 

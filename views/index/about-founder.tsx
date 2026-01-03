@@ -42,7 +42,11 @@ const AboutFounder = (props: Props) => {
           <div className="text-sm sm:text-base md:text-lg">
             <p className="font-medium text-neutral-900">Deepak Nepal</p>
             <p className="text-xs sm:text-sm md:text-base text-neutral-500">
-              Founder, MeroManche
+              Founder,&nbsp;
+              <span className="text-black font-bold font-roca">Mero</span>
+              <span className="text-primary-500 font-bold font-roca">
+                Manche
+              </span>
             </p>
           </div>
         </div>
