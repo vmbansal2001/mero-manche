@@ -1,48 +1,87 @@
-import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { type NextRequest, NextResponse } from "next/server";
+import { parseBody } from "next-sanity/webhook";
 
-const secret = process.env.SANITY_REVALIDATE_SECRET;
-
-type WebhookBody = {
-  slug?: { current?: string } | string;
+type SanityWebhookPayload = {
+  _type: string;
+  slug?: {
+    current?: string;
+  };
 };
 
-export async function POST(request: Request) {
-  if (!secret) {
-    return NextResponse.json(
-      { message: "Missing SANITY_REVALIDATE_SECRET" },
-      { status: 500 }
-    );
-  }
-
-  const url = new URL(request.url);
-  const token = url.searchParams.get("secret");
-
-  if (!token || token !== secret) {
-    return NextResponse.json({ message: "Invalid secret" }, { status: 401 });
-  }
-
-  let slug: string | undefined;
-
+export async function POST(req: NextRequest) {
   try {
-    const body = (await request.json()) as WebhookBody | undefined;
-    if (typeof body?.slug === "string") {
-      slug = body.slug;
-    } else if (typeof body?.slug === "object") {
-      slug = body.slug?.current;
+    const { isValidSignature, body } = await parseBody<SanityWebhookPayload>(
+      req,
+      process.env.SANITY_REVALIDATE_SECRET
+    );
+
+    if (!isValidSignature) {
+      console.error("Invalid webhook signature");
+      return new Response("Invalid signature", { status: 401 });
     }
-  } catch {
-    // ignore JSON parse errors, will fall back to revalidating list only
+
+    if (!body?._type) {
+      console.error("Webhook body missing _type:", body);
+      return new Response("Bad Request: Missing _type", { status: 400 });
+    }
+
+    // Handle different document types
+    const documentType = body._type;
+    const slug = body.slug?.current;
+
+    // Define route mapping for each document type
+    const routeMap: Record<string, string> = {
+      blog: "/blog",
+    };
+
+    const basePath = routeMap[documentType];
+
+    if (basePath) {
+      const additionalBlogPaths = ["/blog"];
+
+      if (slug) {
+        // Revalidate the specific page
+        const pagePath = `${basePath}/${slug}`;
+        revalidatePath(pagePath, "page");
+        revalidatePath(basePath, "page");
+
+        if (documentType === "blog") {
+          additionalBlogPaths.forEach((path) => revalidatePath(path, "page"));
+        }
+
+        console.log(`Revalidated ${documentType} page: ${pagePath}`);
+
+        return NextResponse.json({
+          revalidated: true,
+          now: Date.now(),
+          path: pagePath,
+          type: documentType,
+        });
+      } else {
+        // If slug is missing, revalidate all pages of this type
+        // This is useful for deletions or when slug changes
+        revalidatePath(basePath, "layout");
+        if (documentType === "blog") {
+          additionalBlogPaths.forEach((path) => revalidatePath(path, "layout"));
+        }
+        console.log(`Revalidated all ${documentType} pages (slug missing)`);
+
+        return NextResponse.json({
+          revalidated: true,
+          now: Date.now(),
+          path: `${basePath}/*`,
+          type: documentType,
+        });
+      }
+    }
+
+    return NextResponse.json({
+      revalidated: false,
+      reason: `Type "${body._type}" is not configured for revalidation`,
+    });
+  } catch (err: any) {
+    console.error("Error revalidating:", err);
+    return new Response(err.message, { status: 500 });
   }
-
-  revalidatePath("/blog");
-
-  if (slug) {
-    revalidatePath(`/blog/${slug}`);
-  }
-
-  return NextResponse.json({
-    revalidated: true,
-    paths: slug ? [`/blog`, `/blog/${slug}`] : [`/blog`],
-  });
 }

@@ -3,7 +3,7 @@ import BlogIndexRoute from "@/views/blog/blog-index-route";
 import { sanityFetch } from "@/sanity/lib/client";
 import { blogListQuery, type BlogListItem } from "@/sanity/queries";
 
-export const revalidate = 60;
+export const revalidate = 86400; // 24 hours
 
 export const metadata: Metadata = {
   title: "Blog | Mero Manche",

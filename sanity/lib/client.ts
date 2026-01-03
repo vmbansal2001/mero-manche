@@ -24,7 +24,7 @@ export const client = createClient({
 export async function sanityFetch<T>({
   query,
   params = {},
-  revalidate = 60,
+  revalidate = 86400, // 24 hours
 }: {
   query: string;
   params?: Record<string, unknown>;
