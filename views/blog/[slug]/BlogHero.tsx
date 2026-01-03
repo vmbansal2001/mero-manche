@@ -21,15 +21,14 @@ export function BlogHero({ post }: BlogHeroProps) {
 
   return (
     <section className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm">
-      <div className="relative h-80 w-full overflow-hidden bg-linear-to-br from-zinc-100 to-zinc-200">
+      <div className="relative w-full overflow-hidden bg-linear-to-br from-zinc-100 to-zinc-200">
         {post.coverImage ? (
           <SanityImage
             image={post.coverImage}
             alt={post.title}
-            fill
-            className="object-cover"
+            width={1000}
+            className="object-cover h-full w-full"
             preload
-            sizes="100vw"
           />
         ) : null}
         <div className="absolute inset-0 bg-linear-to-t from-black/40 via-black/10 to-transparent" />
